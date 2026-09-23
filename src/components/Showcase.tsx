@@ -64,7 +64,7 @@ export function Flow() {
   return (
     <section
       aria-label="Your phone is now your server"
-      className="relative mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32"
+      className="relative wrap py-24 sm:py-32"
     >
       <Reveal className="mx-auto max-w-3xl text-center">
         <p className="mono-tech text-[11px] uppercase tracking-[0.28em] text-[#8E8E93] dark:text-[#6E6E73]">

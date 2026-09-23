@@ -60,13 +60,13 @@ function FileBody() {
               size={15}
               className="shrink-0 text-[#8E8E93] dark:text-[#6E6E73]"
             />
-            <span className="text-[13.5px] font-medium">{r.n}</span>
-            <span className="mono-tech ml-auto text-[11px] text-[#8E8E93] dark:text-[#6E6E73]">
+            <span className="min-w-0 flex-1 truncate text-[13.5px] font-medium">{r.n}</span>
+            <span className="mono-tech shrink-0 text-[11px] text-[#8E8E93] dark:text-[#6E6E73]">
               {r.m}
             </span>
             <ChevronRight
               size={14}
-              className="text-[#8E8E93] opacity-0 transition group-hover:opacity-100 dark:text-[#6E6E73]"
+              className="shrink-0 text-[#8E8E93] opacity-0 transition group-hover:opacity-100 dark:text-[#6E6E73]"
             />
           </motion.li>
         ))}
@@ -416,7 +416,7 @@ export function Features() {
     <section
       id="features"
       aria-label="Features"
-      className="relative mx-auto max-w-[1200px] scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32"
+      className="relative wrap scroll-mt-24 py-24 sm:py-32"
     >
       <Reveal className="mx-auto max-w-3xl text-center">
         <p className="mono-tech text-[11px] uppercase tracking-[0.28em] text-[#8E8E93] dark:text-[#6E6E73]">

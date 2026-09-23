@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
@@ -50,15 +49,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetmono.variable} h-full antialiased`} suppressHydrationWarning>
-      <head>
-        <Script
-          id="pocketserver-theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('pocketserver-theme');if(t==='light'){document.documentElement.classList.remove('dark')}}catch(e){}})()`,
-          }}
-        />
-      </head>
       <body className="min-h-full bg-[#F5F5F7] text-zinc-900 dark:bg-black dark:text-zinc-100">
         <ThemeProvider>
           <a

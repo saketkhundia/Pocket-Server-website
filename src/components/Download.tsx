@@ -46,7 +46,7 @@ export function DownloadSection() {
   return (
     <section
       id="download"
-      className="mx-auto max-w-[1200px] scroll-mt-24 px-5 pb-8 sm:px-8"
+      className="wrap scroll-mt-24 pb-8"
     >
       <Reveal>
         <div className="panel grain relative overflow-hidden rounded-[24px] px-6 py-24 text-center sm:px-12 sm:py-32">

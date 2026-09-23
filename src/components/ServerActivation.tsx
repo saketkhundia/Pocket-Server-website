@@ -71,7 +71,7 @@ export function ServerActivation() {
   return (
     <section
       aria-label="Server activation"
-      className="relative mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32"
+      className="relative wrap py-24 sm:py-32"
     >
       <div ref={ref} className="relative mx-auto max-w-3xl text-center">
         <p className="mono-tech text-[11px] uppercase tracking-[0.28em] text-[#8E8E93] dark:text-[#6E6E73]">
@@ -133,7 +133,7 @@ export function ServerActivation() {
               aria-label="Copy server address"
               className="group mx-auto mt-5 flex w-full max-w-sm items-center gap-3 rounded-2xl border border-black/10 bg-black/[0.03] px-4 py-3.5 text-left transition hover:border-black/20 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20"
             >
-              <span className="mono-tech flex-1 truncate text-center text-[15px] font-medium sm:text-base">
+              <span className="mono-tech min-w-0 flex-1 truncate text-center text-[15px] font-medium sm:text-base">
                 {phase === "offline" ? "— : —" : ADDRESS}
               </span>
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[10px] border border-black/10 transition group-hover:bg-black/[0.05] dark:border-white/10 dark:group-hover:bg-white/[0.07]">

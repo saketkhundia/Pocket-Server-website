@@ -25,7 +25,7 @@ export function OpenSource() {
   return (
     <section
       id="open-source"
-      className="mx-auto max-w-[1200px] scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32"
+      className="wrap scroll-mt-24 py-24 sm:py-32"
     >
       <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal>

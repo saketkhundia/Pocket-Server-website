@@ -14,7 +14,7 @@ export function ProductBrowser({
   caption?: string;
 }) {
   return (
-    <figure className="relative">
+    <figure className="relative min-w-0">
       <div
         aria-hidden="true"
         className="absolute -inset-5 rounded-[28px] bg-[radial-gradient(closest-side,rgba(255,255,255,0.045),transparent)] blur-2xl"
@@ -29,7 +29,7 @@ export function ProductBrowser({
           </span>
           <span className="mono-tech flex min-w-0 flex-1 items-center gap-2 truncate rounded-lg bg-black/[0.04] px-3 py-1.5 text-[11.5px] text-[#5B5F68] dark:bg-white/[0.05] dark:text-[#A1A1AA]">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
-            <span className="truncate">{url}</span>
+            <span className="min-w-0 truncate">{url}</span>
           </span>
         </div>
         <div className="relative">{children}</div>

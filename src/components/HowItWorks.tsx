@@ -27,14 +27,13 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative mx-auto max-w-[1200px] scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32">
+    <section id="how-it-works" className="relative wrap scroll-mt-24 py-24 sm:py-32">
       <SectionHeading
         eyebrow="How it works"
         title={<>From phone to server in seconds.</>}
         sub="Three steps. No terminal, no config files, no port-forwarding."
       />
-      <div className="relative mt-14">
-        <div aria-hidden="true" className="absolute left-[60px] top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-black/15 to-transparent lg:block dark:via-white/15" />
+      <div className="mt-14">
         <div className="space-y-4">
           {STEPS.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.08}>

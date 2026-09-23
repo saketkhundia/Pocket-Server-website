@@ -9,7 +9,7 @@ import { Logo } from "./Logo";
 
 export function FinalCTA() {
   return (
-    <section className="relative px-4 pb-8 sm:px-8">
+    <section className="relative px-5 pb-8 sm:px-8">
       <Reveal className="grain relative mx-auto max-w-[1200px] overflow-hidden rounded-[24px] bg-[#050506] text-white">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           {/* single quiet light field — product lighting, not decoration */}

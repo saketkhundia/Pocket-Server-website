@@ -37,7 +37,7 @@ const FAQS = [
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-5 py-24 sm:px-8">
+    <section id="faq" className="wrap-narrow scroll-mt-24 py-24">
       <SectionHeading
         eyebrow="FAQ"
         title={<>Questions, answered.</>}

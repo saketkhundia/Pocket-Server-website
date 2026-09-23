@@ -5,11 +5,47 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useState,
+  useLayoutEffect,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
 type Theme = "dark" | "light";
+
+const KEY = "pocketserver-theme";
+
+function readStored(): Theme {
+  try {
+    return window.localStorage.getItem(KEY) === "light" ? "light" : "dark";
+  } catch {
+    return "dark";
+  }
+}
+
+/* External-store plumbing: the server snapshot is always "dark" (matches
+   the rendered <html>), so hydration never mismatches. After hydration the
+   client re-reads the stored value and re-renders — by design, no error. */
+let listeners: Array<() => void> = [];
+
+function subscribe(onChange: () => void) {
+  listeners = [...listeners, onChange];
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === KEY) onChange();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    listeners = listeners.filter((l) => l !== onChange);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+function getSnapshot(): Theme {
+  return readStored();
+}
+
+function getServerSnapshot(): Theme {
+  return "dark";
+}
 
 const ThemeContext = createContext<{
   theme: Theme;
@@ -20,25 +56,26 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark";
-    return window.localStorage.getItem("pocketserver-theme") === "light"
-      ? "light"
-      : "dark";
-  });
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-  useEffect(() => {
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  /* layout effect: corrects the class before first paint, no flash */
+  useIsomorphicLayoutEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
   const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
-      localStorage.setItem("pocketserver-theme", next);
-      document.documentElement.classList.toggle("dark", next === "dark");
-      return next;
-    });
+    const next: Theme = readStored() === "dark" ? "light" : "dark";
+    try {
+      window.localStorage.setItem(KEY, next);
+    } catch {
+      /* storage unavailable — theme still applies for this session */
+    }
+    document.documentElement.classList.toggle("dark", next === "dark");
+    listeners.forEach((l) => l());
   }, []);
 
   return (

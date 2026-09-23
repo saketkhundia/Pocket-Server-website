@@ -28,7 +28,7 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 border-t border-black/[0.08] dark:border-white/[0.07]">
-      <div className="mx-auto max-w-[1200px] px-5 py-12 sm:px-8">
+      <div className="wrap py-12">
         <div className="flex flex-col justify-between gap-10 md:flex-row md:items-start">
           <div className="max-w-xs">
             <Link href="/" onClick={goTop} className="flex items-center gap-3" aria-label="PocketServer home">

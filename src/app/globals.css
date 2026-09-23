@@ -235,17 +235,24 @@ body {
   transform: translateY(0px) scale(0.98);
 }
 
-/* ---------- layout: single 1200px grid ---------- */
-
+/* ---------- layout: single shared grid ----------
+   Every section, card row, and the navbar align to this.
+   Gutters come from width (not padding), so nested content
+   can never drift off the grid. */
 .wrap {
-  width: 100%;
-  max-width: var(--content-max);
+  width: min(100% - 40px, var(--content-max));
   margin-inline: auto;
-  padding-inline: 20px;
+}
+.wrap-narrow {
+  width: min(100% - 40px, 48rem);
+  margin-inline: auto;
 }
 @media (min-width: 640px) {
   .wrap {
-    padding-inline: 32px;
+    width: min(100% - 64px, var(--content-max));
+  }
+  .wrap-narrow {
+    width: min(100% - 64px, 48rem);
   }
 }
 

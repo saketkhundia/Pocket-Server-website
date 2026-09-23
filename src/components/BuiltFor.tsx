@@ -30,7 +30,7 @@ const ROWS = [
 
 export function BuiltFor() {
   return (
-    <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-8">
+    <section className="wrap py-16">
       <SectionHeading
         eyebrow="Who it's for"
         title={<>Built for people who want more from their phone.</>}

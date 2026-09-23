@@ -38,13 +38,16 @@ function HeroPhone({ running }: { running: boolean }) {
 }
 
 /* network originates from the phone — PHONE = SERVER.
-   Lines draw once (construction). No traveling dots, no loops. */
+   Lines draw once (construction). No traveling dots, no loops.
+   Chip positions are derived from the SVG coordinates below
+   (800×500 space → %), and the SVG stretches 1:1, so every line
+   lands exactly on its chip at any viewport width. */
 const NODES = [
   {
     icon: Laptop,
     label: "Laptop",
     meta: "192.168.1.11",
-    cls: "left-[4%] top-[8%]",
+    cls: "left-[18.5%] top-[19%]",
     x: 148,
     y: 96,
     path: "M400 260 C 320 220, 230 170, 148 96",
@@ -53,7 +56,7 @@ const NODES = [
     icon: Monitor,
     label: "Desktop",
     meta: "192.168.1.14",
-    cls: "right-[4%] top-[12%]",
+    cls: "left-[81.5%] top-[21.5%]",
     x: 652,
     y: 108,
     path: "M400 260 C 480 220, 570 170, 652 108",
@@ -62,7 +65,7 @@ const NODES = [
     icon: TabletSmartphone,
     label: "Tablet",
     meta: "192.168.1.18",
-    cls: "left-[2%] bottom-[10%]",
+    cls: "left-[16%] top-[82.5%]",
     x: 128,
     y: 412,
     path: "M400 260 C 310 300, 210 350, 128 412",
@@ -71,7 +74,7 @@ const NODES = [
     icon: Globe,
     label: "Browser",
     meta: ":8080",
-    cls: "right-[2%] bottom-[8%]",
+    cls: "left-[84%] top-[81%]",
     x: 672,
     y: 404,
     path: "M400 260 C 490 300, 590 350, 672 404",
@@ -154,10 +157,14 @@ export function Hero() {
     >
       {/* one connected light system — phone is the brightest object */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute left-1/2 top-[52%] h-[480px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.055),transparent)] blur-3xl dark:bg-[radial-gradient(closest-side,rgba(255,255,255,0.05),transparent)]"
-          style={reduce ? undefined : { x: glowX, y: glowY }}
-        />
+        {/* outer centers, inner drifts — motion transform must never
+            own the centering, or it overrides the -translate classes */}
+        <div className="absolute left-1/2 top-[52%] h-[480px] w-[680px] -translate-x-1/2 -translate-y-1/2">
+          <motion.div
+            className="h-full w-full rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.055),transparent)] blur-3xl dark:bg-[radial-gradient(closest-side,rgba(255,255,255,0.05),transparent)]"
+            style={reduce ? undefined : { x: glowX, y: glowY }}
+          />
+        </div>
         <div
           className={`absolute left-1/2 top-[58%] h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(52,211,153,0.08),transparent)] blur-3xl transition-opacity duration-[2200ms] ${
             running ? "opacity-100" : "opacity-0"
@@ -165,7 +172,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="relative wrap">
         {/* ------- ACT 01 · copy ------- */}
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
@@ -308,7 +315,7 @@ export function Hero() {
             <svg
               aria-hidden="true"
               viewBox="0 0 800 500"
-              preserveAspectRatio="xMidYMid meet"
+              preserveAspectRatio="none"
               className="absolute inset-0 hidden h-full w-full sm:block"
               fill="none"
             >
@@ -319,6 +326,7 @@ export function Hero() {
                   stroke="currentColor"
                   className="text-black/20 dark:text-white/[0.13]"
                   strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
                   initial={{ opacity: 0, pathLength: 0 }}
                   animate={
                     linesOn ? { opacity: 1, pathLength: 1 } : { opacity: 0 }
